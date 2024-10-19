@@ -17,11 +17,11 @@ export default defineConfig({
       wrap: true
     }
   },
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'ru', 'de', 'es', 'hi'],
-	routing: {                                                                                          
-		prefixDefaultLocale: true
-	}	
-  }
+//   i18n: {
+//     defaultLocale: 'en',
+//     locales: ['en', 'ru', 'de', 'es', 'hi'],
+// 	routing: {                                                                                          
+// 		prefixDefaultLocale: true
+// 	}	
+//   }
 });
