@@ -1,17 +1,25 @@
 ---
+// src/components/FormattedDate.astro
 interface Props {
-	date: Date;
+  date?: Date | string | undefined;
+  format?: 'long' | 'short';
 }
 
-const { date } = Astro.props;
+const { date, format = 'long' } = Astro.props;
+
+// Only try to format if date exists
+const datetime = date ? (date instanceof Date ? date.toISOString() : new Date(date).toISOString()) : '';
+const formattedDate = date 
+  ? new Date(date).toLocaleDateString('en-us', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    })
+  : '';
 ---
 
-<time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString('en-us', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric',
-		})
-	}
-</time>
+{date && (
+  <time datetime={datetime}>
+    {formattedDate}
+  </time>
+)}

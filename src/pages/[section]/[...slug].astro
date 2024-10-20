@@ -1,0 +1,62 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import PhotoPost from '../../layouts/PhotoPost.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Define valid section names
+type ValidSection = 'blog' | 'tech' | 'photo' | 'bible' | 'language';
+
+function isValidSection(section: string): section is ValidSection {
+  return ['blog', 'tech', 'photo', 'bible', 'language'].includes(section);
+}
+
+export async function getStaticPaths() {
+  const allPosts = await Promise.all([
+    getCollection('blog'),
+    getCollection('tech'),
+    getCollection('photo'),
+    getCollection('bible'),
+    getCollection('language')
+  ]);
+  
+  return allPosts.flat().map((post) => {
+    const section = post.collection;
+    // Generate slug from id if slug doesn't exist
+    const slug = 'slug' in post ? post.slug : post.id.replace(/\.[^/.]+$/, '');
+
+    return {
+      params: {
+        section,
+        slug,
+      },
+      props: { post },
+    };
+  });
+}
+
+const { section } = Astro.params;
+const { post } = Astro.props;
+
+if (!section || !isValidSection(section)) {
+  throw new Error(`Invalid section: ${section}`);
+}
+
+const { Content } = await post.render();
+
+// Select the appropriate layout based on the section
+const getLayout = (section: ValidSection, post: CollectionEntry<ValidSection>) => {
+  switch (section) {
+    case 'photo':
+      return PhotoPost;
+    default:
+      return BaseLayout;
+  }
+};
+
+const Layout = getLayout(section, post);
+---
+
+<Layout {...post.data}>
+  <Content />
+</Layout>

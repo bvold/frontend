@@ -1,0 +1,150 @@
+---
+// src/layouts/PhotoPost.astro
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import PhotoGallery from '../components/PhotoGallery.astro';
+
+type ExifData = {
+  aperture?: string;
+  shutterSpeed?: string;
+  iso?: number;
+  focalLength?: string;
+};
+
+type GalleryImage = {
+  url: string;
+  caption?: string;
+  alt: string;
+  exif?: ExifData;
+};
+
+interface Props {
+  title: string;
+  description?: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  heroImage?: string;
+  camera?: string;
+  lens?: string;
+  gallery?: GalleryImage[];
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  camera,
+  lens,
+  gallery
+} = Astro.props;
+
+function formatExifData(exif: ExifData | undefined): string | null {
+  if (!exif) return null;
+  const parts = [];
+  if (exif.aperture) parts.push(`ƒ/${exif.aperture}`);
+  if (exif.shutterSpeed) parts.push(`${exif.shutterSpeed}s`);
+  if (exif.iso) parts.push(`ISO ${exif.iso}`);
+  if (exif.focalLength) parts.push(`${exif.focalLength}mm`);
+  return parts.join(' • ');
+}
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="max-w-4xl mx-auto">
+    {heroImage && (
+      <div class="relative mb-8">
+        <img
+          src={heroImage}
+          alt={title}
+          class="w-full h-[600px] object-cover rounded-lg shadow-lg"
+        />
+        {(camera || lens) && (
+          <div class="absolute bottom-4 right-4 bg-black bg-opacity-75 text-white px-4 py-2 rounded-lg text-sm">
+            {camera && <span class="mr-2">{camera}</span>}
+            {lens && <span>{lens}</span>}
+          </div>
+        )}
+      </div>
+    )}
+
+    <header class="mb-8">
+      <h1 class="text-4xl font-bold mb-4">{title}</h1>
+      {description && (
+        <p class="text-xl text-gray-600 mb-4">{description}</p>
+      )}
+      <div class="flex items-center gap-4 text-gray-500">
+        <FormattedDate date={pubDate} />
+        {updatedDate && (
+          <span>
+            Updated: <FormattedDate date={updatedDate} format="short" />
+          </span>
+        )}
+      </div>
+    </header>
+
+    {/* Camera Settings Section */}
+    {(camera || lens) && (
+      <div class="bg-gray-50 rounded-lg p-6 mb-8">
+        <h2 class="text-lg font-semibold mb-4">Equipment Used</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {camera && (
+            <div>
+              <span class="text-gray-600">Camera:</span>
+              <span class="ml-2 font-medium">{camera}</span>
+            </div>
+          )}
+          {lens && (
+            <div>
+              <span class="text-gray-600">Lens:</span>
+              <span class="ml-2 font-medium">{lens}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+
+    {/* Main Content */}
+    <div class="prose max-w-none mb-12">
+      <slot />
+    </div>
+
+    {/* Photo Gallery */}
+    {gallery && gallery.length > 0 && (
+      <div class="mt-12">
+        <h2 class="text-2xl font-bold mb-6">Photo Gallery</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {gallery.map((photo) => (
+            <div class="group relative">
+              <img
+                src={photo.url}
+                alt={photo.alt}
+                class="w-full rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+              <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/75 to-transparent text-white rounded-b-lg">
+                {photo.caption && (
+                  <p class="mb-2">{photo.caption}</p>
+                )}
+                {photo.exif && (
+                  <p class="text-sm opacity-75">{formatExifData(photo.exif)}</p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  img {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .gallery-image:hover {
+    transform: scale(1.02);
+  }
+</style>

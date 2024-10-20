@@ -1,0 +1,15 @@
+---
+// src/components/CodeBlock.astro
+interface Props {
+  code: string;
+  lang: string;
+}
+
+const { code, lang } = Astro.props;
+---
+<pre class="relative rounded-lg bg-gray-900 p-4">
+  <div class="absolute top-2 right-2 text-xs text-gray-400">{lang}</div>
+  <code class={`language-${lang}`}>
+    {code}
+  </code>
+</pre>

@@ -1,0 +1,30 @@
+---
+// src/components/PhotoGallery.astro
+interface Photo {
+  url: string;
+  caption?: string;
+  alt: string;
+}
+
+interface Props {
+  photos: Photo[];
+}
+
+const { photos } = Astro.props;
+---
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  {photos.map((photo) => (
+    <div class="relative group">
+      <img
+        src={photo.url}
+        alt={photo.alt}
+        class="w-full h-64 object-cover rounded-lg"
+      />
+      {photo.caption && (
+        <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg">
+          {photo.caption}
+        </div>
+      )}
+    </div>
+  ))}
+</div>

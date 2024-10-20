@@ -1,0 +1,20 @@
+---
+// src/components/LanguageSwitcher.astro
+const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'ru', name: 'Русский' },
+  { code: 'de', name: 'Deutsch' },
+  { code: 'es', name: 'Español' },
+  { code: 'hi', name: 'हिन्दी' }
+];
+---
+<div class="relative inline-block text-left">
+  <select
+    class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+    onchange="window.location.href = this.value"
+  >
+    {languages.map((lang) => (
+      <option value={`/${lang.code}`}>{lang.name}</option>
+    ))}
+  </select>
+</div>

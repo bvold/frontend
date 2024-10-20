@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import astroExif from './src/integration/astro-exif';
+
 
 export default defineConfig({
   site: 'https://blog.bryanvold.com',
@@ -10,6 +12,7 @@ export default defineConfig({
     mdx(),
     tailwind(),
     sitemap(),
+    astroExif(),
   ],
   markdown: {
     shikiConfig: {
