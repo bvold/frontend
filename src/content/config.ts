@@ -55,7 +55,7 @@ const languageSchema = baseSchema.extend({
 
 // Define collections for each content type
 export const collections = {
-  'blog': defineCollection({ schema: blogSchema }),
+  'general': defineCollection({ schema: blogSchema }),
   'tech': defineCollection({ schema: techSchema }),
   'photo': defineCollection({ schema: photoSchema }),
   'bible': defineCollection({ schema: bibleSchema }),

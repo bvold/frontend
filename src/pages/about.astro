@@ -1,62 +1,66 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { ACTION_ERROR_CODES } from 'astro:actions';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage="/blog-placeholder-about.jpg"
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
-
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
-
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
-
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
-
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h3>About Me</h4>
+			<p>
+			Hello! I'm Bryan, a developer with an insatiable curiosity, always eager to dive deep into new projects and ideas. This blog is my space to not only document my thoughts and discoveries but also share them with the world. I stumbled upon Astro after initially learning about Hugo, and building this site became a thrilling adventure in itself. I wanted a platform where I could explore a variety of passions—from technology to photography, Bible prophecy, and language learning.
+			</p><br/>
+			<h4>My Journey into Development</h4>
+			<p>
+			My interest in computers began early on, thanks to a program for gifted and talented students at my elementary school. Although I didn’t necessarily see myself as gifted, school came easily to me, which sparked my curiosity. My small school had a MECC system teletype terminal connected to the Twin Cities, and that was my first taste of computing. In high school, I took my first computer science course, and from there, I was hooked.
+			</p><br/>
+			<h4>The First Language I Learned</h4>
+			<p>
+			The first language I learned was Commodore PET BASIC, and my first personal computer was a Commodore 64, which I purchased for $199 from Montgomery Wards. I went on to study computer science at the University of Minnesota, where one of my proudest achievements was writing a Unix shell that became the key solution for my professor’s class. Over the years, I’ve worked with various languages, including Pascal, Lisp, Smalltalk, C, and Rust.
+			</p><br/>
+			<h4>One of My Proudest Projects</h4>
+			<p>
+			One of my proudest projects is a phonetic spell checker I originally wrote in Java, which I recently converted to Rust with the help of AI tools. Exploring the use of AI in development has been another exciting part of my journey.
+			<p><br/>
+			<h4>Photography: From the Cosmos to the Petal</h4>
+			<p>
+			My love for photography likely stems from my childhood fascination with astronomy. I was always curious about both the very large and the very small—astronomy and atoms alike. One of my first cameras was a box camera I took to Bible camp, and I’ve been hooked ever since.
+			</p><br/>
+			<h4>Macro Photography</h4>
+			<p>
+			When digital cameras became mainstream, I delved into macro photography, using a Nikon Coolpix to capture intricate details of flowers. Today, I primarily use my Nikon D70S for nature photography, particularly focusing on sunsets, flowers, and the moon. John Shaw's nature photography books have been an inspiration for me, and I highly recommend his work to anyone interested in the field.
+			</p><br/>
+			<h4>A Passion for Bible Prophecy</h4>
+			<p><br/>
+			Around 2010, I experienced what I can only describe as an awakening, where I felt strongly that "We are in the end times." Since then, I’ve developed a deep interest in Bible prophecy, drawing insights from authors like Thomas Horn and teachers such as Steve Cioccolanti and Brandon Biggs. This has become an integral part of my life and something I often reflect on in my writing and thinking.
+			</p><br/>
+			<h4>Language Learning: A Lifelong Journey</h4>
+			<p>
+			My passion for languages started in high school with German, and it blossomed from there. I traveled to Germany with my German club during my freshman year, an experience that felt nothing short of magical. Since then, I’ve been on a language-learning adventure, studying everything from Russian and Turkish to French, Hebrew, and Hindi.			
+			Right now, I’m focused on Russian, German, Turkish, and Yiddish, though I’ve dabbled in more than 20 languages to varying degrees. Duolingo has been a helpful tool, and I’ve also been inspired by my son’s language journey, particularly after he studied abroad in Costa Rica.
+			<h4>Other Interests</h4>
+			<p>
+			Aside from tech, photography, and languages, I’ve always been passionate about astronomy, cosmology, and science in general. I’m particularly drawn to physics and chemistry, but I also have a deep interest in linguistics and English grammar. During my university years, I even joined the juggling club and spent hours perfecting my skills with clubs!
+			</p><br/>
+			<p>
+			One of my greatest joys is helping others, especially those learning English. I discovered this passion while correcting English exercises on Busuu, and it’s something that continues to inspire me today.
+			</p><br/>
+			<h4>Looking Ahead</h4>
+			<p>
+			I tend to dive deeply into topics that catch my interest, and I’m always exploring new avenues. Recently, I discovered the concept of Ultralearning, which has piqued my interest in optimizing how I approach learning in all aspects of my life.
+			</p><br/>
+			<p></p>
+			If I had to summarize my life and this blog in three words, it would be: Learn, Discover, Share. These are the principles that guide me, and I hope they resonate with you as you explore my blog.
+			</p>
+		</main>
+		<Footer />
+	</body>
+</html>

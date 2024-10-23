@@ -6,16 +6,16 @@ import FormattedDate from '../../components/FormattedDate.astro';
 import type { CollectionEntry } from 'astro:content';
 
 // Define valid section names
-type ValidSection = 'blog' | 'tech' | 'photo' | 'bible' | 'language';
+type ValidSection = 'general' | 'tech' | 'photo' | 'bible' | 'language';
 
 // Type guard to check if a string is a valid section
 function isValidSection(section: string): section is ValidSection {
-  return ['blog', 'tech', 'photo', 'bible', 'language'].includes(section);
+  return ['general', 'tech', 'photo', 'bible', 'language'].includes(section);
 }
 
 export async function getStaticPaths() {
   return [
-    { params: { section: 'blog' }, props: { title: 'Miscellaneous Blog' } },
+    { params: { section: 'general' }, props: { title: 'General Blog' } },
     { params: { section: 'tech' }, props: { title: 'Development Blog' } },
     { params: { section: 'photo' }, props: { title: 'Photography Blog' } },
     { params: { section: 'bible' }, props: { title: 'Bible & Prophecy Blog' } },

@@ -5,15 +5,15 @@ import PhotoPost from '../../layouts/PhotoPost.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 // Define valid section names
-type ValidSection = 'blog' | 'tech' | 'photo' | 'bible' | 'language';
+type ValidSection = 'general' | 'tech' | 'photo' | 'bible' | 'language';
 
 function isValidSection(section: string): section is ValidSection {
-  return ['blog', 'tech', 'photo', 'bible', 'language'].includes(section);
+  return ['general', 'tech', 'photo', 'bible', 'language'].includes(section);
 }
 
 export async function getStaticPaths() {
   const allPosts = await Promise.all([
-    getCollection('blog'),
+    getCollection('general'),
     getCollection('tech'),
     getCollection('photo'),
     getCollection('bible'),
