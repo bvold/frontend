@@ -19,7 +19,7 @@
   - Add system theme detection
 
 ## Content Management
-- [ ] Integrate Decap CMS
+- [X] Integrate Decap CMS
   - Set up authentication
   - Configure content models
   - Create editor interface

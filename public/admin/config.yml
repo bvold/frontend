@@ -1,0 +1,94 @@
+local_backend: true
+
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "general"
+    label: "Blog Posts"
+    folder: "src/content/general"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Publication Date", name: "pubDate", widget: "datetime"}
+      - {label: "Updated Date", name: "updatedDate", widget: "datetime", required: false}
+      - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
+
+  - name: "tech"
+    label: "Tech Posts"
+    folder: "src/content/tech"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Publication Date", name: "pubDate", widget: "datetime"}
+      - {label: "Updated Date", name: "updatedDate", widget: "datetime", required: false}
+      - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
+      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Programming Language", name: "language", widget: "string", required: false}
+      - {label: "Code Repository", name: "codeRepo", widget: "string", required: false}
+
+  - name: "photo"
+    label: "Photo Posts"
+    folder: "src/content/photo"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Publication Date", name: "pubDate", widget: "datetime"}
+      - {label: "Photo Date", name: "date", widget: "datetime"}
+      - {label: "Updated Date", name: "updatedDate", widget: "datetime", required: false}
+      - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
+      - {label: "Camera", name: "camera", widget: "string", required: false}
+      - {label: "Lens", name: "lens", widget: "string", required: false}
+      - label: "Gallery"
+        name: "gallery"
+        widget: "list"
+        required: false
+        fields:
+          - {label: "Image", name: "url", widget: "image"}
+          - {label: "Caption", name: "caption", widget: "string", required: false}
+          - {label: "Alt Text", name: "alt", widget: "string"}
+          - label: "EXIF Data"
+            name: "exif"
+            widget: "object"
+            required: false
+            fields:
+              - {label: "Date Taken", name: "dateTaken", widget: "string", required: false}
+              - {label: "Camera", name: "camera", widget: "string", required: false}
+              - {label: "Lens", name: "lens", widget: "string", required: false}
+              - {label: "Focal Length", name: "focalLength", widget: "string", required: false}
+              - {label: "Aperture", name: "aperture", widget: "string", required: false}
+              - {label: "Shutter Speed", name: "shutterSpeed", widget: "string", required: false}
+              - {label: "ISO", name: "iso", widget: "number", required: false}
+
+  - name: "bible"
+    label: "Bible Studies"
+    folder: "src/content/bible"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Publication Date", name: "pubDate", widget: "datetime"}
+      - {label: "Updated Date", name: "updatedDate", widget: "datetime", required: false}
+      - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
+      - {label: "Scripture References", name: "scriptureReferences", widget: "list", required: false}
+      - {label: "Category", name: "category", widget: "select", options: ["interpretation", "study", "commentary"], required: false}
+
+  - name: "language"
+    label: "Language Posts"
+    folder: "src/content/language"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Description", name: "description", widget: "text"}
+      - {label: "Publication Date", name: "pubDate", widget: "datetime"}
+      - {label: "Updated Date", name: "updatedDate", widget: "datetime", required: false}
+      - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
+      - {label: "Language Level", name: "languageLevel", widget: "select", options: ["beginner", "intermediate", "advanced"], required: false}
+      - {label: "Target Language", name: "targetLanguage", widget: "string"}
