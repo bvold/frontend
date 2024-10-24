@@ -11,19 +11,22 @@ function isValidSection(section: string): section is ValidSection {
   return ['general', 'tech', 'photo', 'bible', 'language'].includes(section);
 }
 
+type AllCollections = CollectionEntry<ValidSection>;
+
 export async function getStaticPaths() {
-  const allPosts = await Promise.all([
+  const allPosts: AllCollections[] = (await Promise.all([
     getCollection('general'),
     getCollection('tech'),
     getCollection('photo'),
     getCollection('bible'),
     getCollection('language')
-  ]);
+  ])).flat();
   
-  return allPosts.flat().map((post) => {
+  console.log('Post structure:', allPosts[0]);
+  
+  return allPosts.map((post) => {
     const section = post.collection;
-    // Generate slug from id if slug doesn't exist
-    const slug = 'slug' in post ? post.slug : post.id.replace(/\.[^/.]+$/, '');
+    const slug = post.id.replace(/\.[^/.]+$/, '')
 
     return {
       params: {
