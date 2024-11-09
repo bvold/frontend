@@ -1,6 +1,6 @@
 // src/content/config.ts
 import { defineCollection, z } from 'astro:content';
-import { date } from 'astro:schema';
+// import { date } from 'astro:schema';
 
 // Define schemas for different content types
 const baseSchema = z.object({
@@ -9,6 +9,7 @@ const baseSchema = z.object({
   pubDate: z.coerce.date(),
   updatedDate: z.coerce.date().optional(),
   heroImage: z.string().optional(),
+  category: z.enum(['general', 'tech', 'photo', 'bible', 'language']),
 });
 
 const blogSchema = baseSchema.extend({
@@ -45,7 +46,7 @@ const photoSchema = baseSchema.extend({
 
 const bibleSchema = baseSchema.extend({
   scriptureReferences: z.array(z.string()).optional(),
-  category: z.enum(['interpretation', 'study', 'commentary']).optional(),
+  bibleBlogType: z.enum(['interpretation', 'study', 'commentary']).optional(),
 });
 
 const languageSchema = baseSchema.extend({

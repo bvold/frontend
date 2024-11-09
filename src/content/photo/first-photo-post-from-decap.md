@@ -3,6 +3,7 @@ title: First photo post from Decap
 description: First photo post from Decap
 pubDate: 2024-10-24T11:21:00.000Z
 date: 2024-10-24T11:21:00.000Z
+category: photo
 heroImage: /images/1.jpg
 camera: Nikon D70S
 lens: 500mm

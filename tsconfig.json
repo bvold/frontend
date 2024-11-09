@@ -2,6 +2,19 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "strictNullChecks": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"]
-  }
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": ".",
+    "allowJs": true,
+    "resolveJsonModule": true
+  },
+  "include": ["./**/*.ts", "./**/*.tsx", "./src/content/**/*.md","./src/content/**/*.mdx", "scripts/generateHeroImages.mts"],
+  "exclude": ["node_modules"]
 }

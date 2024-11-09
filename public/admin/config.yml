@@ -9,7 +9,7 @@ public_folder: "/images"
 
 collections:
   - name: "general"
-    label: "Blog Posts"
+    label: "General Posts"
     folder: "src/content/general"
     create: true
     fields:
@@ -78,7 +78,7 @@ collections:
       - {label: "Updated Date", name: "updatedDate", widget: "datetime", required: false}
       - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
       - {label: "Scripture References", name: "scriptureReferences", widget: "list", required: false}
-      - {label: "Category", name: "category", widget: "select", options: ["interpretation", "study", "commentary"], required: false}
+      - {label: "Bible Blog Type", name: "bibleBlogType", widget: "select", options: ["interpretation", "study", "commentary"], required: false}
 
   - name: "language"
     label: "Language Posts"

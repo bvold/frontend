@@ -43,7 +43,7 @@ const {
 
 function formatExifData(exif: ExifData | undefined): string | null {
   if (!exif) return null;
-  const parts = [];
+  const parts: string[] = [];
   if (exif.aperture) parts.push(`ƒ/${exif.aperture}`);
   if (exif.shutterSpeed) parts.push(`${exif.shutterSpeed}s`);
   if (exif.iso) parts.push(`ISO ${exif.iso}`);

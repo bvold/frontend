@@ -3,6 +3,8 @@
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import HeroImage from '../components/HeroImage.astro';
+const { frontmatter } = Astro.props;
 
 type Props = CollectionEntry<'general'>['data'] |
              CollectionEntry<'tech'>['data'] | 
@@ -14,14 +16,20 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 <BaseLayout title={title} description={description}>
   <article class="prose lg:prose-xl mx-auto">
-    {heroImage && (
+    <!-- {heroImage && (
       <img 
         src={heroImage} 
         alt="" 
         class="w-full h-[400px] object-cover rounded-lg shadow-lg mb-8"
       />
-    )}
-    <h1 class="text-4xl font-bold mb-4">{title}</h1>
+    )} -->
+    <HeroImage 
+      title={frontmatter.title}
+      category={frontmatter.category}
+      date={new Date(frontmatter.date)}
+    />
+  
+<h1 class="text-4xl font-bold mb-4">{title}</h1>
     <div class="flex gap-2 text-gray-500 mb-8">
       <FormattedDate date={pubDate} />
       {updatedDate && (
