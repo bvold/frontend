@@ -27,6 +27,7 @@
     "exiftool-vendored": "^28.7.0",
     "glob": "^11.0.0",
     "gray-matter": "^4.0.3",
+    "lucide-react": "^0.456.0",
     "node-exiftool": "^2.3.0",
     "sharp": "^0.33.5",
     "yaml": "^2.6.0"

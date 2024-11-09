@@ -1,15 +1,17 @@
 ---
-// src/layouts/PhotoPost.astro
-// import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-// import PhotoGallery from '../components/PhotoGallery.astro';
 
 type ExifData = {
+  dateTaken?: string;
+  camera?: string;
+  lens?: string;
+  focalLength?: string;
+  // aperture?: string | number;
   aperture?: string;
+  // shutterSpeed?: string | number;
   shutterSpeed?: string;
   iso?: number;
-  focalLength?: string;
 };
 
 type GalleryImage = {
@@ -25,6 +27,7 @@ interface Props {
   pubDate: Date;
   updatedDate?: Date;
   heroImage?: string;
+  heroExif?: ExifData;
   camera?: string;
   lens?: string;
   gallery?: GalleryImage[];
@@ -36,24 +39,54 @@ const {
   pubDate,
   updatedDate,
   heroImage,
-  camera,
-  lens,
+  heroExif,
+  // camera,
+  // lens,
   gallery
 } = Astro.props;
 
-function formatExifData(exif: ExifData | undefined): string | null {
-  if (!exif) return null;
+function formatExifData(exif: ExifData | undefined): string[] {
+  if (!exif) return [];
   const parts: string[] = [];
-  if (exif.aperture) parts.push(`ƒ/${exif.aperture}`);
-  if (exif.shutterSpeed) parts.push(`${exif.shutterSpeed}s`);
+  
+  // if (exif.aperture) parts.push(`ƒ/${typeof exif.aperture === 'number' ? exif.aperture.toFixed(1) : exif.aperture}`);
+  if (exif.aperture) parts.push(`ƒ/${exif.aperture.toString()}`);
+  if (exif.shutterSpeed) {
+    const speed = typeof exif.shutterSpeed === 'number' 
+      ? exif.shutterSpeed < 1 ? `1/${Math.round(1/exif.shutterSpeed)}` : `${exif.shutterSpeed}`
+      : exif.shutterSpeed;
+    parts.push(`${speed}s`);
+  }
   if (exif.iso) parts.push(`ISO ${exif.iso}`);
-  if (exif.focalLength) parts.push(`${exif.focalLength}mm`);
-  return parts.join(' • ');
+  if (exif.focalLength) parts.push(`${exif.focalLength.replace('mm', '')}mm`);
+  
+  return parts;
 }
+
+function formatDate(dateString: string | undefined): string {
+  if (!dateString) return '';
+  
+  // Convert "YYYY:MM:DD HH:MM:SS" to "YYYY-MM-DDTHH:MM:SS"
+  const formattedDateString = dateString.replace(/^(\d{4}):(\d{2}):(\d{2})/, '$1-$2-$3').replace(' ', 'T');
+  const date = new Date(formattedDateString);
+
+  console.log('dateString:', dateString);                // Original format
+  console.log('formattedDateString:', formattedDateString);  // Reformatted for Date parsing
+  console.log('date:', date);                             // Date object
+
+  return date.toLocaleDateString(undefined, { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="max-w-4xl mx-auto">
+  <article class="max-w-4xl mx-auto px-4">
     {heroImage && (
       <div class="relative mb-8">
         <img
@@ -61,10 +94,55 @@ function formatExifData(exif: ExifData | undefined): string | null {
           alt={title}
           class="w-full h-[600px] object-cover rounded-lg shadow-lg"
         />
-        {(camera || lens) && (
-          <div class="absolute bottom-4 right-4 bg-black bg-opacity-75 text-white px-4 py-2 rounded-lg text-sm">
-            {camera && <span class="mr-2">{camera}</span>}
-            {lens && <span>{lens}</span>}
+        {heroExif && (
+          <div class="absolute bottom-4 left-4 right-4 bg-black/75 text-white px-6 py-4 rounded-lg backdrop-blur-sm">
+            <div class="flex flex-wrap gap-6 items-center text-sm">
+              {heroExif.camera && (
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+                    <circle cx="12" cy="13" r="3" />
+                  </svg>
+                  <span>{heroExif.camera}</span>
+                </div>
+              )}
+              {heroExif.lens && (
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 3h18v18H3z" />
+                    <path d="M21 21L3 3" />
+                  </svg>
+                  <span>{heroExif.lens}</span>
+                </div>
+              )}
+              {heroExif.dateTaken && (
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                  </svg>
+                  <span>{formatDate(heroExif.dateTaken)}</span>
+                </div>
+              )}
+            </div>
+            <div class="flex flex-wrap gap-4 mt-2 text-sm text-gray-200">
+              {formatExifData(heroExif).map((detail) => (
+                <span class="flex items-center gap-1">
+                  {detail.includes('ƒ/') && (
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10" />
+                      <path d="M14.31 8l5.74 5.74M5.95 18.37l5.74-5.74M12 12v4M12 12h4" />
+                    </svg>
+                  )}
+                  {detail.includes('ISO') && (
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                  )}
+                  {detail}
+                </span>
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -85,27 +163,6 @@ function formatExifData(exif: ExifData | undefined): string | null {
       </div>
     </header>
 
-    {/* Camera Settings Section */}
-    {(camera || lens) && (
-      <div class="bg-gray-50 rounded-lg p-6 mb-8">
-        <h2 class="text-lg font-semibold mb-4">Equipment Used</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {camera && (
-            <div>
-              <span class="text-gray-600">Camera:</span>
-              <span class="ml-2 font-medium">{camera}</span>
-            </div>
-          )}
-          {lens && (
-            <div>
-              <span class="text-gray-600">Lens:</span>
-              <span class="ml-2 font-medium">{lens}</span>
-            </div>
-          )}
-        </div>
-      </div>
-    )}
-
     {/* Main Content */}
     <div class="prose max-w-none mb-12">
       <slot />
@@ -121,14 +178,53 @@ function formatExifData(exif: ExifData | undefined): string | null {
               <img
                 src={photo.url}
                 alt={photo.alt}
-                class="w-full rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
+                class="w-full aspect-[4/3] object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
               />
-              <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/75 to-transparent text-white rounded-b-lg">
+              <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/75 via-black/50 to-transparent text-white rounded-b-lg">
                 {photo.caption && (
-                  <p class="mb-2">{photo.caption}</p>
+                  <p class="mb-2 font-medium">{photo.caption}</p>
                 )}
                 {photo.exif && (
-                  <p class="text-sm opacity-75">{formatExifData(photo.exif)}</p>
+                  <div class="space-y-1 text-sm">
+                    <div class="flex flex-wrap gap-3">
+                      {photo.exif.camera && (
+                        <span class="flex items-center gap-1">
+                          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+                            <circle cx="12" cy="13" r="3" />
+                          </svg>
+                          {photo.exif.camera}
+                        </span>
+                      )}
+                      {photo.exif.dateTaken && (
+                        <span class="flex items-center gap-1">
+                          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                          </svg>
+                          {formatDate(photo.exif.dateTaken)}
+                        </span>
+                      )}
+                    </div>
+                    <div class="flex flex-wrap gap-3 text-gray-200">
+                      {formatExifData(photo.exif).map((detail) => (
+                        <span class="flex items-center gap-1">
+                          {detail.includes('ƒ/') && (
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <circle cx="12" cy="12" r="10" />
+                              <path d="M14.31 8l5.74 5.74M5.95 18.37l5.74-5.74M12 12v4M12 12h4" />
+                            </svg>
+                          )}
+                          {detail.includes('ISO') && (
+                            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                            </svg>
+                          )}
+                          {detail}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 )}
               </div>
             </div>

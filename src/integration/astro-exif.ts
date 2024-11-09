@@ -4,11 +4,7 @@ import { getExifData } from '../utils/exif';
 import path from 'path';
 import fs from 'fs/promises';
 import yaml from 'yaml';
-
-interface AstroPage {
-  component: string;
-  [key: string]: any;
-}
+import { glob } from 'glob';
 
 interface GalleryImage {
   url: string;
@@ -31,63 +27,94 @@ interface Frontmatter {
   [key: string]: any;
 }
 
-async function parseImagePath(imagePath: string): Promise<string> {
+async function parseImagePath(imagePath: string, publicDir: string): Promise<string> {
+  // Remove any URL parameters
+  imagePath = imagePath.split('?')[0];
+  
   // Convert URL path to filesystem path
   const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-  return path.join(process.cwd(), 'public', cleanPath);
+  const fullPath = path.join(publicDir, cleanPath);
+  
+  console.log(`Attempting to access image at: ${fullPath}`);
+  
+  // Check if file exists
+  try {
+    await fs.access(fullPath);
+    return fullPath;
+  } catch (error) {
+    throw new Error(`Image file not found: ${fullPath}`);
+  }
 }
 
 async function updateFrontmatter(content: string, heroExif: any, galleryExifData: any[]): Promise<string> {
   const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!frontmatterMatch) return content;
+  if (!frontmatterMatch) {
+    console.warn('No frontmatter found in content');
+    return content;
+  }
 
-  const frontmatter = yaml.parse(frontmatterMatch[1]) as Frontmatter;
+  let frontmatter;
+  try {
+    frontmatter = yaml.parse(frontmatterMatch[1]) as Frontmatter;
+    console.log('Parsed frontmatter:', frontmatter);
+  } catch (error) {
+    console.error('Error parsing frontmatter:', error);
+    return content;
+  }
 
   // Update hero image EXIF if it exists
   if (heroExif) {
-    frontmatter.heroExif = {
-      dateTaken: heroExif.dateTaken,
-      camera: heroExif.camera,
-      lens: heroExif.lens,
-      focalLength: heroExif.focalLength,
-      aperture: heroExif.aperture,
-      shutterSpeed: heroExif.shutterSpeed,
-      iso: heroExif.iso
-    };
+    frontmatter.heroExif = heroExif;
+    console.log('Updated hero EXIF:', heroExif);
   }
 
   // Update gallery EXIF data if it exists
   if (frontmatter.gallery && galleryExifData.length > 0) {
     frontmatter.gallery = frontmatter.gallery.map((image: GalleryImage, index: number) => ({
       ...image,
-      exif: galleryExifData[index] ? {
-        dateTaken: galleryExifData[index].dateTaken,
-        camera: galleryExifData[index].camera,
-        lens: galleryExifData[index].lens,
-        focalLength: galleryExifData[index].focalLength,
-        aperture: galleryExifData[index].aperture,
-        shutterSpeed: galleryExifData[index].shutterSpeed,
-        iso: galleryExifData[index].iso
-      } : image.exif
+      exif: galleryExifData[index] || image.exif
     }));
+    console.log('Updated gallery EXIF data');
   }
 
-  return `---\n${yaml.stringify(frontmatter)}---${content.slice(frontmatterMatch[0].length)}`;
+  const newFrontmatter = yaml.stringify(frontmatter);
+  return `---\n${newFrontmatter}---${content.slice(frontmatterMatch[0].length)}`;
 }
 
 export default function astroExif(): AstroIntegration {
+  let exiftoolProcess: any = null;
+
   return {
     name: 'astro-exif',
     hooks: {
-      'astro:build:setup': async ({ pages }) => {
-        const photoFiles = Array.from(pages.values()).filter((page: AstroPage) => 
-          page.component.includes('content/photo/') || 
-          page.component.includes('content/photos/')
-        );
+      'astro:config:setup': async () => {
+        console.log('Initializing astro-exif integration');
+        // Initialize ExifTool process
+        const { default: exiftool } = await import('node-exiftool');
+        const ep = new exiftool.ExiftoolProcess();
+        await ep.open();
+        exiftoolProcess = ep;
+        console.log('ExifTool process initialized');
+      },
+      'astro:build:setup': async () => {
+        const publicDir = path.join(process.cwd(), 'public');
+        const contentDir = path.join(process.cwd(), 'src', 'content', 'photo');
         
-        for (const page of photoFiles) {
+        console.log('Public directory:', publicDir);
+        console.log('Content directory:', contentDir);
+        
+        // Find all markdown and MDX files in the content/photo directory
+        const photoFiles = await glob(['**/*.{md,mdx}'], {
+          cwd: contentDir,
+          absolute: true
+        });
+        
+        console.log(`Found ${photoFiles.length} photo files to process:`, photoFiles);
+        
+        for (const filePath of photoFiles) {
           try {
-            const content = await fs.readFile(page.component, 'utf-8');
+            console.log(`\nProcessing ${filePath}`);
+            const content = await fs.readFile(filePath, 'utf-8');
             const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
             
             if (frontmatterMatch) {
@@ -97,11 +124,13 @@ export default function astroExif(): AstroIntegration {
 
               // Process hero image if it exists
               if (frontmatter.heroImage) {
-                const heroImagePath = await parseImagePath(frontmatter.heroImage);
                 try {
+                  const heroImagePath = await parseImagePath(frontmatter.heroImage, publicDir);
+                  console.log(`Reading EXIF from hero image: ${heroImagePath}`);
                   heroExif = await getExifData(heroImagePath);
+                  console.log('Hero image EXIF data:', heroExif);
                 } catch (error) {
-                  console.warn(`Warning: Could not read EXIF data from hero image ${heroImagePath}:`, error);
+                  console.warn(`Warning: Could not read EXIF data from hero image ${frontmatter.heroImage}:`, error);
                 }
               }
 
@@ -109,8 +138,10 @@ export default function astroExif(): AstroIntegration {
               if (frontmatter.gallery) {
                 for (const image of frontmatter.gallery) {
                   try {
-                    const imagePath = await parseImagePath(image.url);
+                    const imagePath = await parseImagePath(image.url, publicDir);
+                    console.log(`Reading EXIF from gallery image: ${imagePath}`);
                     const exifData = await getExifData(imagePath);
+                    console.log('Gallery image EXIF data:', exifData);
                     galleryExifData.push(exifData);
                   } catch (error) {
                     console.warn(`Warning: Could not read EXIF data from gallery image ${image.url}:`, error);
@@ -121,11 +152,19 @@ export default function astroExif(): AstroIntegration {
 
               // Update the frontmatter with the new EXIF data
               const updatedContent = await updateFrontmatter(content, heroExif, galleryExifData);
-              await fs.writeFile(page.component, updatedContent);
+              await fs.writeFile(filePath, updatedContent);
+              console.log(`Updated ${filePath} with EXIF data`);
             }
           } catch (error) {
-            console.error(`Error processing file ${page.component}:`, error);
+            console.error(`Error processing file ${filePath}:`, error);
           }
+        }
+      },
+      'astro:build:done': async () => {
+        console.log('Cleaning up ExifTool process');
+        // Clean up ExifTool process
+        if (exiftoolProcess) {
+          await exiftoolProcess.close();
         }
       }
     }

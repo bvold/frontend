@@ -1,15 +1,15 @@
 ---
-title: First photo post from Decap
-description: First photo post from Decap
-pubDate: 2024-10-24T11:21:00.000Z
-date: 2024-10-24T11:21:00.000Z
+title: Second Photo Post from Decap
+description: The second post to try to get exif parsing figured out.
+pubDate: 2024-11-09T13:29:00.000Z
+date: 2024-11-09T13:29:00.000Z
+updatedDate: 2024-11-09T13:29:00.000Z
 heroImage: /images/1.jpg
-camera: ""
-lens: ""
+category: photo
 gallery:
   - url: /images/1.jpg
     caption: Autumn in Minnesota
-    alt: Autumn in MInnesota
+    alt: autumn Minnesota png
     exif:
       dateTaken: 2016:10:02 08:02:26
       camera: iPhone 6
@@ -18,7 +18,6 @@ gallery:
       aperture: "2.2"
       shutterSpeed: 1/640
       iso: 32
-category: photo
 heroExif:
   dateTaken: 2016:10:02 08:02:26
   camera: iPhone 6
