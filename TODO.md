@@ -1,10 +1,10 @@
 # Astro Blog TODO List
 
 ## High Priority Features
-- [ ] Blog Post Search
-  - Implement search functionality for blog posts
-  - Consider using tools like Lunr.js or Algolia
-  - Ensure mobile-friendly search interface
+- [X] Blog Post Search
+  - [x] Implement search functionality for blog posts
+  - [ ] Consider using tools like Lunr.js or Algolia or Pagefind
+  - [ ] Ensure mobile-friendly search interface
 
 - [ ] Tags and Tag Queries
   - Add tag support to blog posts
@@ -26,24 +26,24 @@
   - Add preview functionality
 
 ## Content Sections
-- [ ] Complete Photo Blog Section
-  - Design photo gallery layout
-  - Implement image optimization
-  - Add lightbox functionality
-  - Include EXIF data display
+- [X] Complete Photo Blog Section
+  - [ ] Design photo gallery layout
+  - [ ] Implement image optimization
+  - [ ] Add lightbox functionality
+  - [x] Include EXIF data display
 
 - [ ] Enhance Development (Tech) Blog
-  - Create code syntax highlighting
-  - Add copy code button
-  - Implement series/related posts
-  - Add reading time estimates
+  - [ ] Create code syntax highlighting
+  - [ ] Add copy code button
+  - [ ] Implement series/related posts
+  - [ ] Add reading time estimates
 
 ## User Interaction
 - [ ] Blog Post Comments
   - Research comment system options
-    - Giscus (GitHub Discussions)
-    - Utterances
-    - Disqus
+    - [x] Giscus (GitHub Discussions)
+    - [ ] Utterances
+    - [ ]Disqus
   - Implement chosen solution
   - Add moderation capabilities
 
@@ -55,7 +55,7 @@
   - Set up email notifications
 
 ## Future Considerations
-- [ ] RSS Feed
+- [x] RSS Feed
 - [ ] Newsletter Integration
 - [ ] Social Media Sharing
 - [ ] Analytics Integration

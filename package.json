@@ -17,7 +17,6 @@
     "generate-heroes": "npx ts-node-esm scripts/generateHeroImages.mts"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "^3.1.9",
     "@astrojs/rss": "^4.0.9",
     "@astrojs/sitemap": "^3.2.1",
@@ -27,7 +26,6 @@
     "exiftool-vendored": "^28.8.0",
     "glob": "^11.0.0",
     "gray-matter": "^4.0.3",
-    "lucide-react": "^0.456.0",
     "node-exiftool": "^2.3.0",
     "sharp": "^0.33.5",
     "yaml": "^2.6.0"
