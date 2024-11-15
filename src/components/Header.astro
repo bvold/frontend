@@ -50,42 +50,49 @@ import ThemeIcon from './ThemeIcon.astro';
 </header>
 <style>
 	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+	  margin: 0;
+	  padding: 0 1em;
+	  background: var(--nav-bg);
+	  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 	}
+	
 	h2 {
-		margin: 0;
-		font-size: 1em;
+	  margin: 0;
+	  font-size: 1em;
 	}
-
+  
 	h2 a,
 	h2 a.active {
-		text-decoration: none;
+	  text-decoration: none;
+	  color: var(--text-primary);
 	}
+	
 	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+	  display: flex;
+	  align-items: center;
+	  justify-content: space-between;
 	}
+	
 	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
+	  padding: 1em 0.5em;
+	  color: var(--text-primary);
+	  border-bottom: 4px solid transparent;
+	  text-decoration: none;
 	}
+	
 	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
+	  text-decoration: none;
+	  border-bottom-color: var(--link-color);
 	}
+	
 	.social-links,
 	.social-links a {
-		display: flex;
+	  display: flex;
 	}
+	
 	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
+	  .social-links {
+		display: none;
+	  }
 	}
-</style>
+  </style>
