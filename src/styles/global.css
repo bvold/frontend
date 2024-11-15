@@ -22,6 +22,8 @@
 				  0 16px 32px rgba(96, 115, 159, 33%);
   }
   
+
+
   /* Dark theme overrides */
   html.dark {
 	--background-primary: #0d1117;
@@ -43,13 +45,24 @@
   }
   
   /* Apply theme variables */
-  body {
-	background-color: var(--background-primary);
-	color: var(--text-primary);
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
+  html {
+    background-color: var(--background-primary);
+    min-height: 100%;
   }
-  
+
+  main {
+	flex: 1;
+  }
+
+body {
+  min-height: 100vh;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+  background: linear-gradient(var(--gray-gradient)) no-repeat;
+  background-size: 100% 600px;
+  display: flex;
+  flex-direction: column;
+}
   header {
 	background: var(--nav-bg);
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -89,4 +102,70 @@
   /* Social icons color fix */
   .social-links svg {
 	fill: var(--text-primary);
+  }
+
+  /* Search styling */
+.pagefind-ui {
+	--pagefind-ui-primary: var(--text-primary);
+	--pagefind-ui-text: var(--text-primary);
+	--pagefind-ui-background: var(--background-primary);
+	--pagefind-ui-border: var(--border-color);
+	--pagefind-ui-tag: var(--background-secondary);
+  }
+  
+  .pagefind-ui .pagefind-ui__search-input {
+	background-color: var(--background-secondary);
+	color: var(--text-primary);
+	border-color: var(--border-color);
+  }
+  
+  .pagefind-ui .pagefind-ui__search-clear {
+	color: var(--text-primary);
+  }
+  
+  .pagefind-ui .pagefind-ui__result {
+	color: var(--text-primary);
+  }
+  
+  .pagefind-ui .pagefind-ui__result-title {
+	color: var(--link-color);
+  }
+  
+  .pagefind-ui .pagefind-ui__result-excerpt {
+	color: var(--text-secondary);
+  }
+  
+  .pagefind-ui mark {
+	background-color: var(--accent);
+	color: white;
+  }
+
+  /* Add giscus theme support */
+.giscus {
+	--giscus-color-brand: var(--link-color);
+	--giscus-color-background: var(--background-primary);
+	--giscus-color-text: var(--text-primary);
+	--giscus-color-border: var(--border-color);
+	--giscus-color-shadow: var(--box-shadow);
+	--giscus-color-ghost: var(--text-secondary);
+	--giscus-color-loading: var(--text-secondary);
+  }
+
+  .blog-post {
+	background-color: var(--background-secondary);
+	color: var(--text-primary);
+	box-shadow: var(--box-shadow);
+	transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .blog-post:hover {
+	background-color: var(--background-primary);
+  }
+  
+  .blog-post h4 {
+	color: var(--heading-color);
+  }
+  
+  .blog-post p {
+	color: var(--text-secondary);
   }
