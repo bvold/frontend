@@ -1,10 +1,8 @@
 ---
-// src/layouts/BlogPost.astro
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import HeroImage from '../components/HeroImage.astro';
-const { frontmatter } = Astro.props;
 
 type Props = CollectionEntry<'general'>['data'] |
              CollectionEntry<'tech'>['data'] | 
@@ -12,25 +10,18 @@ type Props = CollectionEntry<'general'>['data'] |
              CollectionEntry<'bible'>['data'] | 
              CollectionEntry<'language'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, frontmatter } = Astro.props as any;
 ---
 <BaseLayout title={title} description={description}>
-  <article class="prose lg:prose-xl mx-auto">
-    <!-- {heroImage && (
-      <img 
-        src={heroImage} 
-        alt="" 
-        class="w-full h-[400px] object-cover rounded-lg shadow-lg mb-8"
-      />
-    )} -->
+  <article class="prose lg:prose-xl dark:prose-dark mx-auto">
     <HeroImage 
       title={frontmatter.title}
       category={frontmatter.category}
       date={new Date(frontmatter.date)}
     />
   
-<h1 class="text-4xl font-bold mb-4">{title}</h1>
-    <div class="flex gap-2 text-gray-500 mb-8">
+    <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-300">{title}</h1>
+    <div class="flex gap-2 text-gray-500 dark:text-gray-400 mb-8">
       <FormattedDate date={pubDate} />
       {updatedDate && (
         <div>
@@ -38,7 +29,9 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
         </div>
       )}
     </div>
-    <slot />
+    <div class="text-gray-800 dark:text-gray-300">
+      <slot />
+    </div>
     <script src="https://giscus.app/client.js"
         data-repo="bvold/frontend"
         data-repo-id="R_kgDONCvMyw"

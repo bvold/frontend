@@ -1,11 +1,10 @@
 ---
-// src/components/Footer.astro
 const today = new Date();
 ---
-<footer class="bg-white border-t border-gray-200 mt-8">
+<footer class="bg-[var(--background-primary)] border-t border-[var(--border-color)]">
   <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
     <div class="mt-8 md:mt-0">
-      <p class="text-center text-base text-gray-400">
+      <p class="text-center text-base text-[var(--text-secondary)]">
         &copy; {today.getFullYear()} Bryan Vold. All rights reserved.
       </p>
     </div>

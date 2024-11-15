@@ -41,7 +41,7 @@ const sortedPosts = posts.sort(
   <section>
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sortedPosts.map((post) => (
-          <li class="bg-white rounded-lg shadow-md overflow-hidden">
+          <li class="blog-post rounded-lg overflow-hidden">
           <a href={`/${section}/${post.slug}/`} class="block hover:opacity-90 transition-opacity">
             {post.data.heroImage && (
               <img 

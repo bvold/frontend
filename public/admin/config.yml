@@ -13,17 +13,20 @@ collections:
     folder: "src/content/general"
     create: true
     fields:
+      - {label: "Category", name: "category", widget: "string", default: "general", required: true}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
       - {label: "Publication Date", name: "pubDate", widget: "datetime"}
       - {label: "Updated Date", name: "updatedDate", widget: "datetime", required: false}
       - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
+      - {label: "Body", name: "body", widget: "markdown", required: true}
 
   - name: "tech"
     label: "Tech Posts"
     folder: "src/content/tech"
     create: true
     fields:
+      - {label: "Category", name: "category", widget: "string", default: "tech", required: true}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
       - {label: "Publication Date", name: "pubDate", widget: "datetime"}
@@ -32,12 +35,14 @@ collections:
       - {label: "Tags", name: "tags", widget: "list"}
       - {label: "Programming Language", name: "language", widget: "string", required: false}
       - {label: "Code Repository", name: "codeRepo", widget: "string", required: false}
+      - {label: "Body", name: "body", widget: "markdown", required: true}
 
   - name: "photo"
     label: "Photo Posts"
     folder: "src/content/photo"
     create: true
     fields:
+      - {label: "Category", name: "category", widget: "string", default: "photo", required: true}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
       - {label: "Publication Date", name: "pubDate", widget: "datetime"}
@@ -66,12 +71,14 @@ collections:
               - {label: "Aperture", name: "aperture", widget: "string", required: false}
               - {label: "Shutter Speed", name: "shutterSpeed", widget: "string", required: false}
               - {label: "ISO", name: "iso", widget: "number", required: false}
+      - {label: "Body", name: "body", widget: "markdown", required: true}
 
   - name: "bible"
     label: "Bible Studies"
     folder: "src/content/bible"
     create: true
     fields:
+      - {label: "Category", name: "category", widget: "string", default: "bible", required: true}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
       - {label: "Publication Date", name: "pubDate", widget: "datetime"}
@@ -79,12 +86,14 @@ collections:
       - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
       - {label: "Scripture References", name: "scriptureReferences", widget: "list", required: false}
       - {label: "Bible Blog Type", name: "bibleBlogType", widget: "select", options: ["interpretation", "study", "commentary"], required: false}
+      - {label: "Body", name: "body", widget: "markdown", required: true}
 
   - name: "language"
     label: "Language Posts"
     folder: "src/content/language"
     create: true
     fields:
+      - {label: "Category", name: "category", widget: "string", default: "language", required: true}
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Description", name: "description", widget: "text"}
       - {label: "Publication Date", name: "pubDate", widget: "datetime"}
@@ -92,3 +101,5 @@ collections:
       - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
       - {label: "Language Level", name: "languageLevel", widget: "select", options: ["beginner", "intermediate", "advanced"], required: false}
       - {label: "Target Language", name: "targetLanguage", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown", required: true}
+     
