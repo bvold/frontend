@@ -20,6 +20,21 @@
 	--box-shadow: 0 2px 6px rgba(96, 115, 159, 25%),
 				  0 8px 24px rgba(96, 115, 159, 33%),
 				  0 16px 32px rgba(96, 115, 159, 33%);
+
+	/* Giscus light theme variables */
+	--giscus-color-background: var(--background-primary);
+	--giscus-color-text: var(--text-primary);
+	--giscus-color-text-secondary: var(--text-secondary);
+	--giscus-color-border: var(--border-color);
+	--giscus-color-input-background: var(--background-secondary);
+	--giscus-color-input-border: var(--border-color);
+	--giscus-color-primary: var(--accent);
+	--giscus-color-primary-darker: var(--accent-dark);
+	--giscus-color-primer-border-active: var(--accent);
+	--giscus-color-bg-overlay: rgba(255, 255, 255, 0.8);
+	--giscus-color-border-primary: var(--border-color);
+	--giscus-color-markdown-blockquote-border: var(--blockquote-border);
+	--giscus-color-markdown-code-bg: var(--code-bg);
   }
   
 
@@ -42,6 +57,20 @@
 	--box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35),
 				  0 8px 24px rgba(0, 0, 0, 0.4),
 				  0 16px 32px rgba(0, 0, 0, 0.4);
+	/* Giscus dark theme variables */
+	--giscus-color-background: var(--background-primary);
+	--giscus-color-text: var(--text-primary);
+	--giscus-color-text-secondary: var(--text-secondary);
+	--giscus-color-border: var(--border-color);
+	--giscus-color-input-background: var(--background-secondary);
+	--giscus-color-input-border: var(--border-color);
+	--giscus-color-primary: var(--link-color);
+	--giscus-color-primary-darker: #1f6feb;
+	--giscus-color-primer-border-active: var(--link-color);
+	--giscus-color-bg-overlay: rgba(13, 17, 23, 0.8);
+	--giscus-color-border-primary: var(--border-color);
+	--giscus-color-markdown-blockquote-border: var(--blockquote-border);
+	--giscus-color-markdown-code-bg: var(--code-bg);
   }
   
   /* Apply theme variables */
@@ -206,4 +235,36 @@ body {
   
   .prose li {
 	@apply mb-2;
+  }
+
+  /* Giscus container styles */
+.giscus {
+	width: 100%;
+	margin-top: 2rem;
+	border-top: 1px solid var(--border-color);
+	padding-top: 2rem;
+  }
+  
+  /* Additional giscus theme support */
+  .giscus-frame {
+	background-color: var(--giscus-color-background);
+	color: var(--giscus-color-text);
+  }
+  
+  /* Ensure giscus inputs match theme */
+  .giscus input, .giscus textarea {
+	background-color: var(--giscus-color-input-background);
+	border-color: var(--giscus-color-input-border);
+	color: var(--giscus-color-text);
+  }
+  
+  /* Style giscus buttons to match theme */
+  .giscus button {
+	background-color: var(--giscus-color-primary);
+	border-color: var(--giscus-color-border);
+	color: var(--background-primary);
+  }
+  
+  .giscus button:hover {
+	background-color: var(--giscus-color-primary-darker);
   }

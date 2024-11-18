@@ -1,0 +1,57 @@
+---
+---
+
+<div id="giscus-container" class="mt-8">
+</div>
+
+<script>
+  function loadGiscus(theme: string) {
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.setAttribute('data-repo', 'bvold/frontend');
+    script.setAttribute('data-repo-id', 'R_kgDONCvMyw');
+    script.setAttribute('data-category', 'Announcements');
+    script.setAttribute('data-category-id', 'DIC_kwDONCvMy84CkJwV');
+    script.setAttribute('data-mapping', 'url');
+    script.setAttribute('data-strict', '1');
+    script.setAttribute('data-reactions-enabled', '1');
+    script.setAttribute('data-emit-metadata', '0');
+    script.setAttribute('data-input-position', 'top');
+    script.setAttribute('data-theme', theme);
+    script.setAttribute('data-lang', 'en');
+    script.setAttribute('data-loading', 'lazy');
+    script.crossOrigin = 'anonymous';
+    script.async = true;
+
+    // Remove existing giscus container contents if they exist
+    const existingContainer = document.getElementById('giscus-container');
+    if (existingContainer) {
+      while (existingContainer.firstChild) {
+        existingContainer.removeChild(existingContainer.firstChild);
+      }
+    }
+
+    // Add the script
+    existingContainer?.appendChild(script);
+  }
+
+  // Initial load
+  const initialTheme = document.documentElement.classList.contains('dark') ? 'dark_dimmed' : 'light';
+  loadGiscus(initialTheme);
+
+  // Watch for theme changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'class') {
+        const isDark = document.documentElement.classList.contains('dark');
+        loadGiscus(isDark ? 'dark_dimmed' : 'light');
+      }
+    });
+  });
+
+  // Start observing the html element for class changes
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class']
+  });
+</script>

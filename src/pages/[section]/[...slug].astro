@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import PhotoPost from '../../layouts/PhotoPost.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogPost from '../../layouts/BlogPost.astro';
 
 // Define valid section names
 type ValidSection = 'general' | 'tech' | 'photo' | 'bible' | 'language';
@@ -53,7 +54,8 @@ const getLayout = (section: ValidSection, post: CollectionEntry<ValidSection>) =
     case 'photo':
       return PhotoPost;
     default:
-      return BaseLayout;
+      // return BaseLayout;
+      return BlogPost;
   }
 };
 
