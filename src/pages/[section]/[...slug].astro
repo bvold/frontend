@@ -23,7 +23,8 @@ export async function getStaticPaths() {
     getCollection('language')
   ])).flat();
   
-  console.log('Post structure:', allPosts[0]);
+  // Debug
+  // console.log('Post structure:', allPosts[0]);
   
   return allPosts.map((post) => {
     const section = post.collection;

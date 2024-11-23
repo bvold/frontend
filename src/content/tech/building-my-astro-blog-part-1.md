@@ -4,7 +4,7 @@ title: Building My Astro Blog - Part 1
 description: A series of posts about creating my Astro blog site
 pubDate: 2024-11-20T07:55:00.000Z
 updatedDate: 2024-11-23T11:40:00.000Z
-heroImage: /images/realistic-picture-of-a-monitor-with-a-blog-post-titled-building-my-astro-blog-part-1-resembling-an-astro-blog-site.png
+heroImage: /images/a-realistic-image-of-a-computer-keyboard-monitor-and-typical-programmer-items-with-a-blog-post-titled-building-my-astro-blog-site-displayed-on-the-screen-with-a-wide-margin-around-it..png
 tags:
   - astro
   - web development
