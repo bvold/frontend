@@ -19,6 +19,7 @@ collections:
       - {label: "Publication Date", name: "pubDate", widget: "datetime"}
       - {label: "Updated Date", name: "updatedDate", widget: "datetime", required: false}
       - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: true}
       - {label: "Body", name: "body", widget: "markdown", required: true}
 
   - name: "tech"
@@ -32,7 +33,7 @@ collections:
       - {label: "Publication Date", name: "pubDate", widget: "datetime"}
       - {label: "Updated Date", name: "updatedDate", widget: "datetime", required: false}
       - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
-      - {label: "Tags", name: "tags", widget: "list"}
+      - {label: "Tags", name: "tags", widget: "list", required: true}
       - {label: "Programming Language", name: "language", widget: "string", required: false}
       - {label: "Code Repository", name: "codeRepo", widget: "string", required: false}
       - {label: "Body", name: "body", widget: "markdown", required: true}
@@ -51,6 +52,7 @@ collections:
       - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
       - {label: "Camera", name: "camera", widget: "string", required: false}
       - {label: "Lens", name: "lens", widget: "string", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: true}
       - label: "Gallery"
         name: "gallery"
         widget: "list"
@@ -86,6 +88,7 @@ collections:
       - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
       - {label: "Scripture References", name: "scriptureReferences", widget: "list", required: false}
       - {label: "Bible Blog Type", name: "bibleBlogType", widget: "select", options: ["interpretation", "study", "commentary"], required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: true}
       - {label: "Body", name: "body", widget: "markdown", required: true}
 
   - name: "language"
@@ -101,5 +104,6 @@ collections:
       - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
       - {label: "Language Level", name: "languageLevel", widget: "select", options: ["beginner", "intermediate", "advanced"], required: false}
       - {label: "Target Language", name: "targetLanguage", widget: "string"}
+      - {label: "Tags", name: "tags", widget: "list", required: true}
       - {label: "Body", name: "body", widget: "markdown", required: true}
      
