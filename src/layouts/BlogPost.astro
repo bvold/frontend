@@ -16,13 +16,12 @@ const { title, description, pubDate, updatedDate, heroImage, frontmatter } = Ast
 <BaseLayout title={title} description={description}>
   <article class="prose lg:prose-xl dark:prose-dark mx-auto">
     <!-- <HeroImage 
-      title={frontmatter.title}
-      category={frontmatter.category}
-      date={new Date(frontmatter.date)}
-    />
-   -->
-    <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-300">{title}</h1>
-    <div class="flex gap-2 text-gray-500 dark:text-gray-400 mb-8">
+      title={title}
+      category='blog'
+      date={new Date(pubDate)}
+    /> -->
+    <h1 class="text-4xl font-bold mb-4">{title}</h1>
+    <div class="flex gap-2 mb-8">
       <FormattedDate date={pubDate} />
       {updatedDate && (
         <div>
@@ -30,7 +29,7 @@ const { title, description, pubDate, updatedDate, heroImage, frontmatter } = Ast
         </div>
       )}
     </div>
-    <div class="text-gray-800 dark:text-gray-300">
+    <div>
       <slot />
     </div>
     <GiscusComments />
