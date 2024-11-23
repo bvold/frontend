@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import astroExif from './src/integration/astro-exif';
 import pagefind from 'astro-pagefind';
 import rehypeExternalLinks from 'rehype-external-links';
-
+import icon from "astro-icon";
 
 export default defineConfig({
   site: 'https://blog.bryanvold.com',
@@ -19,6 +19,11 @@ export default defineConfig({
     sitemap(),
     astroExif(),
     pagefind(),
+    icon({
+      include: {
+        mdi: ["*"]
+      },
+    }),
   ],
   markdown: {
     rehypePlugins: [
