@@ -17,13 +17,13 @@ import { Icon } from 'astro-icon/components';
 		<main class="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 			<!-- Search Section -->
 			<div class="mb-8">
-				<h4 class="text-2xl font-semibold mb-4">Search</h4>
+				<h4 class="text-2xl font-semibold mb-4 text-[var(--heading-color)]">Search</h4>
 				<Search className="pagefind-ui" uiOptions={{ showImages: false }} />
 			</div>
 
 			<!-- Introduction -->
 			<div class="prose max-w-none mb-12">
-				<p class="text-lg">
+				<p class="text-lg text-[var(--text-primary)]">
 					Welcome! This is where I share my adventures and insights across development, photography, biblical studies, languages, and whatever catches my curiosity. Whether you're here to explore nature photography tips, dive into coding challenges, or ponder prophecy, you'll find authentic experiences and practical learnings from my journey. No rigid expertise claims—just honest sharing of what I've learned along the way. Browse by topic below or use the search to find something specific that interests you.
 				</p>
 			</div>
@@ -31,67 +31,67 @@ import { Icon } from 'astro-icon/components';
 			<!-- Topic Grid -->
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 				<!-- Development Card (Large) -->
-				<div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-purple-600 hover:shadow-lg transition-shadow">
+				<div class="bg-[var(--background-secondary)] rounded-lg shadow-md p-6 border-t-4 border-purple-600 hover:shadow-lg transition-shadow">
 					<div class="flex items-center mb-4">
-						<div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
-							<Icon name="mdi:code-braces" class="w-6 h-6 text-purple-600" />
+						<div class="w-12 h-12 bg-purple-900/10 dark:bg-purple-100/10 rounded-full flex items-center justify-center">
+							<Icon name="mdi:code-braces" class="w-6 h-6 text-purple-600 dark:text-purple-400" />
 						</div>
-						<h2 class="text-2xl font-bold ml-4">Development</h2>
+						<h2 class="text-2xl font-bold ml-4 text-[var(--heading-color)]">Development</h2>
 					</div>
 					<div class="mt-4">
-						<p class="text-gray-600">Latest post coming soon...</p>
+						<p class="text-[var(--text-secondary)]">Latest post coming soon...</p>
 					</div>
 				</div>
 
 				<!-- Photography Card (Medium) -->
-				<div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-green-600 hover:shadow-lg transition-shadow">
+				<div class="bg-[var(--background-secondary)] rounded-lg shadow-md p-6 border-t-4 border-green-600 hover:shadow-lg transition-shadow">
 					<div class="flex items-center mb-4">
-						<div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-							<Icon name="mdi:camera" class="w-6 h-6 text-green-600" />
+						<div class="w-12 h-12 bg-green-900/10 dark:bg-green-100/10 rounded-full flex items-center justify-center">
+							<Icon name="mdi:camera" class="w-6 h-6 text-green-600 dark:text-green-400" />
 						</div>
-						<h2 class="text-2xl font-bold ml-4">Photography</h2>
+						<h2 class="text-2xl font-bold ml-4 text-[var(--heading-color)]">Photography</h2>
 					</div>
 					<div class="mt-4">
-						<p class="text-gray-600">Latest post coming soon...</p>
+						<p class="text-[var(--text-secondary)]">Latest post coming soon...</p>
 					</div>
 				</div>
 
 				<!-- Language Card (Large) -->
-				<div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-blue-600 hover:shadow-lg transition-shadow">
+				<div class="bg-[var(--background-secondary)] rounded-lg shadow-md p-6 border-t-4 border-blue-600 hover:shadow-lg transition-shadow">
 					<div class="flex items-center mb-4">
-						<div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center">
-							<Icon name="mdi:earth" class="w-6 h-6 text-blue-600" />
+						<div class="w-12 h-12 bg-blue-900/10 dark:bg-blue-100/10 rounded-full flex items-center justify-center">
+							<Icon name="mdi:earth" class="w-6 h-6 text-blue-600 dark:text-blue-400" />
 						</div>
-						<h2 class="text-2xl font-bold ml-4">Language Learning</h2>
+						<h2 class="text-2xl font-bold ml-4 text-[var(--heading-color)]">Language Learning</h2>
 					</div>
 					<div class="mt-4">
-						<p class="text-gray-600">Latest post coming soon...</p>
+						<p class="text-[var(--text-secondary)]">Latest post coming soon...</p>
 					</div>
 				</div>
 
 				<!-- Bible & Prophecy Card (Medium) -->
-				<div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-yellow-600 hover:shadow-lg transition-shadow">
+				<div class="bg-[var(--background-secondary)] rounded-lg shadow-md p-6 border-t-4 border-yellow-600 hover:shadow-lg transition-shadow">
 					<div class="flex items-center mb-4">
-						<div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-							<Icon name="mdi:scroll" class="w-6 h-6 text-yellow-600" />
+						<div class="w-12 h-12 bg-yellow-900/10 dark:bg-yellow-100/10 rounded-full flex items-center justify-center">
+							<Icon name="mdi:scroll" class="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
 						</div>
-						<h2 class="text-2xl font-bold ml-4">Bible & Prophecy</h2>
+						<h2 class="text-2xl font-bold ml-4 text-[var(--heading-color)]">Bible & Prophecy</h2>
 					</div>
 					<div class="mt-4">
-						<p class="text-gray-600">Latest post coming soon...</p>
+						<p class="text-[var(--text-secondary)]">Latest post coming soon...</p>
 					</div>
 				</div>
 
 				<!-- General Card (Medium) - Centered -->
-				<div class="bg-white rounded-lg shadow-md p-6 border-t-4 border-gray-600 hover:shadow-lg transition-shadow md:col-span-2 md:w-1/2 md:mx-auto">
+				<div class="bg-[var(--background-secondary)] rounded-lg shadow-md p-6 border-t-4 border-gray-600 hover:shadow-lg transition-shadow md:col-span-2 md:w-1/2 md:mx-auto">
 					<div class="flex items-center mb-4">
-						<div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
-							<Icon name="mdi:help-circle" class="w-6 h-6 text-gray-600" />
+						<div class="w-12 h-12 bg-gray-900/10 dark:bg-gray-100/10 rounded-full flex items-center justify-center">
+							<Icon name="mdi:help-circle" class="w-6 h-6 text-gray-600 dark:text-gray-400" />
 						</div>
-						<h2 class="text-2xl font-bold ml-4">General</h2>
+						<h2 class="text-2xl font-bold ml-4 text-[var(--heading-color)]">General</h2>
 					</div>
 					<div class="mt-4">
-						<p class="text-gray-600">Latest post coming soon...</p>
+						<p class="text-[var(--text-secondary)]">Latest post coming soon...</p>
 					</div>
 				</div>
 			</div>
