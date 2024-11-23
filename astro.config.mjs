@@ -5,6 +5,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import astroExif from './src/integration/astro-exif';
 import pagefind from 'astro-pagefind';
+import rehypeExternalLinks from 'rehype-external-links';
 
 
 export default defineConfig({
@@ -20,6 +21,14 @@ export default defineConfig({
     pagefind(),
   ],
   markdown: {
+    rehypePlugins: [
+      [rehypeExternalLinks, {
+        properties: {
+          target: '_blank',
+          rel: ['nofollow', 'noopener', 'noreferrer']
+        }
+      }]
+    ],
     shikiConfig: {
       theme: 'github-dark',
       wrap: true

@@ -227,6 +227,7 @@ body {
   /* Add styles for other markdown elements */
   .prose p {
 	@apply mb-4;
+	color: var(--text-primary);
   }
   
   .prose ul, .prose ol {
