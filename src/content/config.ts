@@ -34,6 +34,7 @@ const photoSchema = baseSchema.extend({
 	alt: z.string(),
 	exif: z.object({
     dateTaken: z.string().optional(),
+    manufacturer: z.string().optional(),
     camera: z.string().optional(),
     lens: z.string().optional(),
     focalLength: z.string().optional(),

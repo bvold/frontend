@@ -67,6 +67,7 @@ collections:
             required: false
             fields:
               - {label: "Date Taken", name: "dateTaken", widget: "string", required: false}
+              - {label: "Manufacturer", name: "manufacturer", widget: "string", required: false}
               - {label: "Camera", name: "camera", widget: "string", required: false}
               - {label: "Lens", name: "lens", widget: "string", required: false}
               - {label: "Focal Length", name: "focalLength", widget: "string", required: false}

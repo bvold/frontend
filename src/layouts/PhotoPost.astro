@@ -5,6 +5,7 @@ import GiscusComments from '../components/GiscusComments.astro';
 
 type ExifData = {
   dateTaken?: string;
+  manufacturer?: string;
   camera?: string;
   lens?: string;
   focalLength?: string;
@@ -48,6 +49,9 @@ const {
 
 function formatExifData(exif: ExifData | undefined): string[] {
   if (!exif) return [];
+
+  console.log('exif:', exif);
+
   const parts: string[] = [];
   
   // if (exif.aperture) parts.push(`ƒ/${typeof exif.aperture === 'number' ? exif.aperture.toFixed(1) : exif.aperture}`);
@@ -61,6 +65,8 @@ function formatExifData(exif: ExifData | undefined): string[] {
   if (exif.iso) parts.push(`ISO ${exif.iso}`);
   if (exif.focalLength) parts.push(`${exif.focalLength.replace('mm', '')}mm`);
   
+  console.log('parts:', parts);
+
   return parts;
 }
 
@@ -194,7 +200,7 @@ function formatDate(dateString: string | undefined): string {
                             <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
                             <circle cx="12" cy="13" r="3" />
                           </svg>
-                          {photo.exif.camera}
+                          {photo.exif.manufacturer} {photo.exif.camera}
                         </span>
                       )}
                       {photo.exif.dateTaken && (

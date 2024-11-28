@@ -35,6 +35,7 @@ export async function getExifData(imagePath: string) {
     // Try different possible tag names for each piece of data
     const result = {
       dateTaken: tags.DateTimeOriginal || tags.CreateDate || tags.ModifyDate,
+      manufacturer: tags.Make || tags.CameraMaker || tags.manufacturer,
       camera: tags.Model || tags.Make,
       lens: tags.LensModel || tags.Lens || tags.LensID,
       // focalLength: tags.FocalLength ? `${tags.FocalLength}mm` : null,

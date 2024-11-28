@@ -12,6 +12,7 @@ interface GalleryImage {
   alt: string;
   exif?: {
     dateTaken?: string;
+    manufacturer?: string;
     camera?: string;
     lens?: string;
     focalLength?: string;
