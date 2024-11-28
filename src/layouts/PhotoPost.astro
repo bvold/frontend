@@ -181,18 +181,18 @@ function formatDate(dateString: string | undefined): string {
         <h2 class="text-2xl font-bold mb-6">Photo Gallery</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {gallery.map((photo) => (
-            <div class="group relative">
+            <div class="group">
               <img
                 src={photo.url}
                 alt={photo.alt}
                 class="w-full aspect-[4/3] object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
               />
-              <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/75 via-black/50 to-transparent text-white rounded-b-lg">
+              <div class="mt-4 space-y-2">
                 {photo.caption && (
-                  <p class="mb-2 font-medium">{photo.caption}</p>
+                  <p class="text-gray-800 font-medium">{photo.caption}</p>
                 )}
                 {photo.exif && (
-                  <div class="space-y-1 text-sm">
+                  <div class="space-y-1 text-sm ">
                     <div class="flex flex-wrap gap-3">
                       {photo.exif.camera && (
                         <span class="flex items-center gap-1">
@@ -213,7 +213,7 @@ function formatDate(dateString: string | undefined): string {
                         </span>
                       )}
                     </div>
-                    <div class="flex flex-wrap gap-3 text-gray-200">
+                    <div class="flex flex-wrap gap-3 ">
                       {formatExifData(photo.exif).map((detail) => (
                         <span class="flex items-center gap-1">
                           {detail.includes('ƒ/') && (
