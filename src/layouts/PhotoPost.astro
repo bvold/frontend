@@ -5,6 +5,7 @@ import GiscusComments from '../components/GiscusComments.astro';
 
 type ExifData = {
   dateTaken?: string;
+  manufacturer?: string;
   camera?: string;
   lens?: string;
   focalLength?: string;
@@ -48,6 +49,9 @@ const {
 
 function formatExifData(exif: ExifData | undefined): string[] {
   if (!exif) return [];
+
+  console.log('exif:', exif);
+
   const parts: string[] = [];
   
   // if (exif.aperture) parts.push(`ƒ/${typeof exif.aperture === 'number' ? exif.aperture.toFixed(1) : exif.aperture}`);
@@ -61,6 +65,8 @@ function formatExifData(exif: ExifData | undefined): string[] {
   if (exif.iso) parts.push(`ISO ${exif.iso}`);
   if (exif.focalLength) parts.push(`${exif.focalLength.replace('mm', '')}mm`);
   
+  console.log('parts:', parts);
+
   return parts;
 }
 
@@ -175,18 +181,18 @@ function formatDate(dateString: string | undefined): string {
         <h2 class="text-2xl font-bold mb-6">Photo Gallery</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           {gallery.map((photo) => (
-            <div class="group relative">
+            <div class="group">
               <img
                 src={photo.url}
                 alt={photo.alt}
                 class="w-full aspect-[4/3] object-cover rounded-lg shadow-lg transition-transform duration-300 group-hover:scale-[1.02]"
               />
-              <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/75 via-black/50 to-transparent text-white rounded-b-lg">
+              <div class="mt-4 space-y-2">
                 {photo.caption && (
-                  <p class="mb-2 font-medium">{photo.caption}</p>
+                  <p class="text-gray-800 font-medium">{photo.caption}</p>
                 )}
                 {photo.exif && (
-                  <div class="space-y-1 text-sm">
+                  <div class="space-y-1 text-sm ">
                     <div class="flex flex-wrap gap-3">
                       {photo.exif.camera && (
                         <span class="flex items-center gap-1">
@@ -194,7 +200,7 @@ function formatDate(dateString: string | undefined): string {
                             <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
                             <circle cx="12" cy="13" r="3" />
                           </svg>
-                          {photo.exif.camera}
+                          {photo.exif.manufacturer} {photo.exif.camera}
                         </span>
                       )}
                       {photo.exif.dateTaken && (
@@ -207,7 +213,7 @@ function formatDate(dateString: string | undefined): string {
                         </span>
                       )}
                     </div>
-                    <div class="flex flex-wrap gap-3 text-gray-200">
+                    <div class="flex flex-wrap gap-3 ">
                       {formatExifData(photo.exif).map((detail) => (
                         <span class="flex items-center gap-1">
                           {detail.includes('ƒ/') && (
