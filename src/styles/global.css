@@ -12,7 +12,10 @@
 	--heading-color: rgb(15, 18, 25);
 	--link-color: var(--accent);
 	--nav-bg: var(--background-primary);
-	--code-bg: rgb(229, 233, 240);
+	--code-bg: #21262d; /* Use the same dark mode background color */
+	--code-text: #c9d1d9; /* Use the same dark mode text color */
+	--code-element-bg: #2d333b; /* Use the same dark mode element background */
+	--code-element-text: #c9d1d9; /* Use the same dark mode element text color */
 	--blockquote-border: var(--accent);
 	
 	/* Gradients and shadows */
@@ -50,6 +53,9 @@
 	--link-color: #58a6ff;
 	--nav-bg: var(--background-primary);
 	--code-bg: #21262d;
+	--code-text: #c9d1d9;
+	--code-element-bg: #2d333b;
+	--code-element-text: #c9d1d9;
 	--blockquote-border: #58a6ff;
 	
 	/* Update gradient and shadows for dark mode */
@@ -200,7 +206,23 @@ body {
   }
 
   /* Add styles for markdown content */
-.prose h1 {
+
+  .prose code {
+	background-color: var(--code-bg);
+	color: var(--code-text);
+	padding: 0.2rem 0.4rem;
+	font-size: 0.875em;
+	border-radius: 0.375rem;
+  }
+  
+  .prose code span {
+	background-color: var(--code-element-bg);
+	color: var(--code-element-text);
+	padding: 0.1rem 0.2rem;
+	border-radius: 0.25rem;
+  }
+
+  .prose h1 {
 	@apply text-4xl font-bold mb-6 mt-8;
   }
   
@@ -268,4 +290,26 @@ body {
   
   .giscus button:hover {
 	background-color: var(--giscus-color-primary-darker);
+  }
+
+  .astro-code {
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	background-color: #21262d;
+	color: #c9d1d9;
+	font-family: monospace;
+	font-size: 1rem;
+	line-height: 1.5;
+	white-space: pre-wrap;
+	overflow-x: auto;
+  }
+  
+  .astro-code span {
+	background-color: #2d333b;
+	color: #c9d1d9;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.375rem;
   }

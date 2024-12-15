@@ -101,57 +101,58 @@ function formatDate(dateString: string | undefined): string {
           alt={title}
           class="w-full h-[600px] object-cover rounded-lg shadow-lg"
         />
-        {heroExif && (
-          <div class="absolute bottom-4 left-4 right-4 bg-black/75 text-white px-6 py-4 rounded-lg backdrop-blur-sm">
-            <div class="flex flex-wrap gap-6 items-center text-sm">
-              {heroExif.camera && (
-                <div class="flex items-center gap-2">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
-                    <circle cx="12" cy="13" r="3" />
-                  </svg>
-                  <span>{heroExif.camera}</span>
-                </div>
-              )}
-              {heroExif.lens && (
-                <div class="flex items-center gap-2">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 3h18v18H3z" />
-                    <path d="M21 21L3 3" />
-                  </svg>
-                  <span>{heroExif.lens}</span>
-                </div>
-              )}
-              {heroExif.dateTaken && (
-                <div class="flex items-center gap-2">
-                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 6v6l4 2" />
-                  </svg>
-                  <span>{formatDate(heroExif.dateTaken)}</span>
-                </div>
-              )}
+      </div>
+    )}
+    
+    {heroExif && (
+      <div class="mb-8  px-6 py-4 rounded-lg">
+        <div class="flex flex-wrap gap-6 items-center text-sm text-gray-800">
+          {heroExif.camera && (
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
+                <circle cx="12" cy="13" r="3" />
+              </svg>
+              <span>{heroExif.camera}</span>
             </div>
-            <div class="flex flex-wrap gap-4 mt-2 text-sm text-gray-200">
-              {formatExifData(heroExif).map((detail) => (
-                <span class="flex items-center gap-1">
-                  {detail.includes('ƒ/') && (
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="12" cy="12" r="10" />
-                      <path d="M14.31 8l5.74 5.74M5.95 18.37l5.74-5.74M12 12v4M12 12h4" />
-                    </svg>
-                  )}
-                  {detail.includes('ISO') && (
-                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-                    </svg>
-                  )}
-                  {detail}
-                </span>
-              ))}
+          )}
+          {heroExif.lens && (
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3h18v18H3z" />
+                <path d="M21 21L3 3" />
+              </svg>
+              <span>{heroExif.lens}</span>
             </div>
-          </div>
-        )}
+          )}
+          {heroExif.dateTaken && (
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg>
+              <span>{formatDate(heroExif.dateTaken)}</span>
+            </div>
+          )}
+        </div>
+        <div class="flex flex-wrap gap-4 mt-2 text-sm text-gray-600">
+          {formatExifData(heroExif).map((detail) => (
+            <span class="flex items-center gap-1">
+              {detail.includes('ƒ/') && (
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M14.31 8l5.74 5.74M5.95 18.37l5.74-5.74M12 12v4M12 12h4" />
+                </svg>
+              )}
+              {detail.includes('ISO') && (
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                </svg>
+              )}
+              {detail}
+            </span>
+          ))}
+        </div>
       </div>
     )}
 
